@@ -4,5 +4,5 @@ enum class Difficulty {
     EASY,
     MEDIUM,
     HARD,
-    //ANY (optional für Fragen mit random Schwierigkeitsgrad)
+    ANY //(optional für Fragen mit random Schwierigkeitsgrad)
 }

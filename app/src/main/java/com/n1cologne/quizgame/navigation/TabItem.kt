@@ -13,19 +13,19 @@ enum class TabItem(
 ) {
     SETTINGS(
         route = SettingsRoute,
-        tabTitle = "Settings",
+        tabTitle = "Einstellungen",
         tabIcon = Icons.Default.Settings
     ),
 
     QUIZ_GAME(
         route = QuizGameRoute,
-        tabTitle = "Quiz",
+        tabTitle = "QuizGame",
         tabIcon = Icons.Default.PlayArrow
     ),
 
     RESULT(
         route = ResultRoute,
-        tabTitle = "Ergebnis",
+        tabTitle = "Ergebnisse",
         tabIcon = Icons.Default.Star
     )
 }
