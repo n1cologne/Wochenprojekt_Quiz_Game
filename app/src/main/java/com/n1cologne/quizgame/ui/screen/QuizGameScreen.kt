@@ -31,6 +31,7 @@ fun QuizGameScreen(
 
     QuizGameContent(
         uiState = uiState,
+        onAnswerClick = viewModel::selectAnswer,
         modifier = modifier
     )
 }
@@ -38,6 +39,7 @@ fun QuizGameScreen(
 @Composable
 private fun QuizGameContent(
     uiState: QuizUiState,
+    onAnswerClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val currentQuestion = uiState.questions
@@ -89,12 +91,16 @@ private fun QuizGameContent(
                     currentQuestion.answers.forEach { answer ->
                         OutlinedButton(
                             onClick = {
-                                // Antwortlogik kommt im nächsten Schritt.
+                                onAnswerClick(answer)
                             },
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Text(
-                                text = answer
+                                text = if (uiState.selectedAnswer == answer) {
+                                    "✓ $answer"
+                                } else {
+                                    answer
+                                }
                             )
                         }
                     }
@@ -128,7 +134,8 @@ private fun QuizGameScreenPreview() {
                         difficulty = Difficulty.EASY
                     )
                 )
-            )
+            ),
+            onAnswerClick = {}
         )
     }
 }

@@ -48,4 +48,10 @@ class QuizViewModel(
                 }
         }
     }
+
+    fun selectAnswer(answer: String) {
+        _uiState.value = _uiState.value.copy(
+            selectedAnswer = answer
+        )
+    }
 }
