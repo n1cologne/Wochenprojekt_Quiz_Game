@@ -6,11 +6,7 @@ plugins {
 
 android {
     namespace = "com.n1cologne.quizgame"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.n1cologne.quizgame"
