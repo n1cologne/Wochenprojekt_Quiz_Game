@@ -1,8 +1,9 @@
-package com.n1cologne.quizgame.domain.repository
+package com.n1cologne.quizgame.data.repository
 
 import com.n1cologne.quizgame.domain.model.Difficulty
 import com.n1cologne.quizgame.domain.model.QuizQuestion
 import com.n1cologne.quizgame.domain.model.QuizSettings
+import com.n1cologne.quizgame.domain.repository.QuizRepository
 
 /**
  * Stellt feste Beispieldaten für Entwicklung und Tests bereit.
@@ -13,9 +14,9 @@ class QuizMockRepository : QuizRepository {
         QuizQuestion(
             question = "What is the capital of France?",
             answers = listOf(
+                "Berlin",
                 "Paris",
                 "London",
-                "Berlin",
                 "Madrid"
             ),
             correctAnswer = "Paris",
@@ -25,9 +26,9 @@ class QuizMockRepository : QuizRepository {
         QuizQuestion(
             question = "Which planet is known as the Red Planet?",
             answers = listOf(
-                "Mars",
                 "Venus",
                 "Jupiter",
+                "Mars",
                 "Mercury"
             ),
             correctAnswer = "Mars",
@@ -37,10 +38,10 @@ class QuizMockRepository : QuizRepository {
         QuizQuestion(
             question = "Who wrote Romeo and Juliet?",
             answers = listOf(
-                "William Shakespeare",
                 "Charles Dickens",
                 "Jane Austen",
-                "Mark Twain"
+                "Mark Twain",
+                "William Shakespeare"
             ),
             correctAnswer = "William Shakespeare",
             category = "Literature",
@@ -61,9 +62,9 @@ class QuizMockRepository : QuizRepository {
         QuizQuestion(
             question = "In which year did the first moon landing happen?",
             answers = listOf(
+                "1975",
                 "1969",
                 "1959",
-                "1975",
                 "1981"
             ),
             correctAnswer = "1969",

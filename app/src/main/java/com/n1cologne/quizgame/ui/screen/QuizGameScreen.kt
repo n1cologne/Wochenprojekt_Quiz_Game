@@ -35,6 +35,7 @@ fun QuizGameScreen(
         onAnswerClick = viewModel::selectAnswer,
         onCheckAnswerClick = viewModel::checkAnswer,
         onNextQuestionClick = viewModel::nextQuestion,
+        onRestartQuizClick = viewModel::restartQuiz,
         modifier = modifier
     )
 }
@@ -45,6 +46,7 @@ private fun QuizGameContent(
     onAnswerClick: (String) -> Unit,
     onCheckAnswerClick: () -> Unit,
     onNextQuestionClick: () -> Unit,
+    onRestartQuizClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val currentQuestion = uiState.questions
@@ -81,6 +83,12 @@ private fun QuizGameContent(
                         text = "${uiState.correctAnswers} von " +
                                 "${uiState.questions.size} Fragen richtig"
                     )
+
+                    Button(
+                        onClick = onRestartQuizClick
+                    ) {
+                        Text(text = "Nochmal spielen")
+                    }
                 }
             }
 
@@ -136,7 +144,7 @@ private fun QuizGameContent(
                             .fillMaxWidth()
                             .padding(top = 8.dp)
                     ) {
-                        Text(text = "Check answer")
+                        Text(text = "Prüfe Antwort")
                     }
 
                     if (uiState.isAnswerChecked) {
@@ -203,7 +211,8 @@ private fun QuizGameScreenPreview() {
             ),
             onAnswerClick = {},
             onCheckAnswerClick = {},
-            onNextQuestionClick = {}
+            onNextQuestionClick = {},
+            onRestartQuizClick = {}
         )
     }
 }

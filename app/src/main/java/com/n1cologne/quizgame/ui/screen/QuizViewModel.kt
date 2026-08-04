@@ -2,7 +2,7 @@ package com.n1cologne.quizgame.ui.screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.n1cologne.quizgame.domain.repository.QuizMockRepository
+import com.n1cologne.quizgame.data.repository.QuizMockRepository
 import com.n1cologne.quizgame.domain.model.QuizSettings
 import com.n1cologne.quizgame.domain.repository.QuizRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -113,5 +113,15 @@ class QuizViewModel(
         )
     }
 
+    fun restartQuiz() {
+        val currentState = _uiState.value
 
+        _uiState.value = currentState.copy(
+            currentQuestionIndex = 0,
+            selectedAnswer = null,
+            isAnswerChecked = false,
+            correctAnswers = 0,
+            isQuizFinished = false
+        )
+    }
 }
