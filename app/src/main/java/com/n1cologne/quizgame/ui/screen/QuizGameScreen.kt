@@ -34,6 +34,7 @@ fun QuizGameScreen(
         uiState = uiState,
         onAnswerClick = viewModel::selectAnswer,
         onCheckAnswerClick = viewModel::checkAnswer,
+        onNextQuestionClick = viewModel::nextQuestion,
         modifier = modifier
     )
 }
@@ -43,6 +44,7 @@ private fun QuizGameContent(
     uiState: QuizUiState,
     onAnswerClick: (String) -> Unit,
     onCheckAnswerClick: () -> Unit,
+    onNextQuestionClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val currentQuestion = uiState.questions
@@ -63,6 +65,23 @@ private fun QuizGameContent(
                 Text(
                     text = uiState.errorMessage.orEmpty()
                 )
+            }
+
+            uiState.isQuizFinished -> {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    Text(
+                        text = "Quiz beendet!",
+                        style = MaterialTheme.typography.headlineMedium
+                    )
+
+                    Text(
+                        text = "${uiState.correctAnswers} von " +
+                                "${uiState.questions.size} Fragen richtig"
+                    )
+                }
             }
 
             currentQuestion == null -> {
@@ -133,6 +152,24 @@ private fun QuizGameContent(
                             style = MaterialTheme.typography.titleMedium
                         )
                     }
+
+                    if (uiState.isAnswerChecked) {
+                        val isLastQuestion =
+                            uiState.currentQuestionIndex == uiState.questions.lastIndex
+
+                        Button(
+                            onClick = onNextQuestionClick,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(
+                                text = if (isLastQuestion) {
+                                    "Quiz beenden"
+                                } else {
+                                    "Nächste Frage"
+                                }
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -165,7 +202,8 @@ private fun QuizGameScreenPreview() {
                 )
             ),
             onAnswerClick = {},
-            onCheckAnswerClick = {}
+            onCheckAnswerClick = {},
+            onNextQuestionClick = {}
         )
     }
 }

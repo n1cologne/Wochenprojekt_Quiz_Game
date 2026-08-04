@@ -87,4 +87,31 @@ class QuizViewModel(
             }
         )
     }
+
+    fun nextQuestion() {
+        val currentState = _uiState.value
+
+        if (!currentState.isAnswerChecked) {
+            return
+        }
+
+        val nextQuestionIndex =
+            currentState.currentQuestionIndex + 1
+
+        if (nextQuestionIndex >= currentState.questions.size) {
+            _uiState.value = currentState.copy(
+                isQuizFinished = true
+            )
+
+            return
+        }
+
+        _uiState.value = currentState.copy(
+            currentQuestionIndex = nextQuestionIndex,
+            selectedAnswer = null,
+            isAnswerChecked = false
+        )
+    }
+
+
 }
