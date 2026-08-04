@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -32,6 +33,7 @@ fun QuizGameScreen(
     QuizGameContent(
         uiState = uiState,
         onAnswerClick = viewModel::selectAnswer,
+        onCheckAnswerClick = viewModel::checkAnswer,
         modifier = modifier
     )
 }
@@ -40,6 +42,7 @@ fun QuizGameScreen(
 private fun QuizGameContent(
     uiState: QuizUiState,
     onAnswerClick: (String) -> Unit,
+    onCheckAnswerClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val currentQuestion = uiState.questions
@@ -93,6 +96,7 @@ private fun QuizGameContent(
                             onClick = {
                                 onAnswerClick(answer)
                             },
+                            enabled = !uiState.isAnswerChecked,
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Text(
@@ -103,6 +107,31 @@ private fun QuizGameContent(
                                 }
                             )
                         }
+                    }
+
+                    Button(
+                        onClick = onCheckAnswerClick,
+                        enabled = uiState.selectedAnswer != null &&
+                                !uiState.isAnswerChecked,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp)
+                    ) {
+                        Text(text = "Check answer")
+                    }
+
+                    if (uiState.isAnswerChecked) {
+                        val isCorrect =
+                            uiState.selectedAnswer == currentQuestion.correctAnswer
+
+                        Text(
+                            text = if (isCorrect) {
+                                "Richtig!"
+                            } else {
+                                "Falsch! Richtige Antwort: ${currentQuestion.correctAnswer}"
+                            },
+                            style = MaterialTheme.typography.titleMedium
+                        )
                     }
                 }
             }
@@ -135,7 +164,8 @@ private fun QuizGameScreenPreview() {
                     )
                 )
             ),
-            onAnswerClick = {}
+            onAnswerClick = {},
+            onCheckAnswerClick = {}
         )
     }
 }

@@ -50,8 +50,41 @@ class QuizViewModel(
     }
 
     fun selectAnswer(answer: String) {
+        val currentState = _uiState.value
+
+        if (currentState.isAnswerChecked) {
+            return
+        }
+
         _uiState.value = _uiState.value.copy(
             selectedAnswer = answer
+        )
+    }
+
+    fun checkAnswer() {
+        val currentState = _uiState.value
+
+        val currentQuestion = currentState.questions
+            .getOrNull(currentState.currentQuestionIndex)
+            ?: return
+
+        val selectedAnswer = currentState.selectedAnswer
+            ?: return
+
+        if (currentState.isAnswerChecked) {
+            return
+        }
+
+        val isCorrect =
+            selectedAnswer == currentQuestion.correctAnswer
+
+        _uiState.value = currentState.copy(
+            isAnswerChecked = true,
+            correctAnswers = if (isCorrect) {
+                currentState.correctAnswers + 1
+            } else {
+                currentState.correctAnswers
+            }
         )
     }
 }
