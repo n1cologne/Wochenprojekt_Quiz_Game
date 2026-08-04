@@ -54,4 +54,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization)
     implementation(libs.androidx.compose.material.icons.extended)
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp.core)
+    implementation(libs.okhttp.logging.interceptor)
 }
