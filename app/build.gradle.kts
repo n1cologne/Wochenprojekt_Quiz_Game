@@ -55,7 +55,8 @@ dependencies {
     implementation(libs.kotlinx.serialization)
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.retrofit.core)
-    implementation(libs.retrofit.converter.gson)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.retrofit.converter.moshi)
     implementation(libs.okhttp.core)
     implementation(libs.okhttp.logging.interceptor)
 }
