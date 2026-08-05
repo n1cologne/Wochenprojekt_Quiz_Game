@@ -2,7 +2,7 @@ package com.n1cologne.quizgame.ui.screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.n1cologne.quizgame.data.repository.QuizMockRepository
+import com.n1cologne.quizgame.data.repository.QuizApiRepository
 import com.n1cologne.quizgame.domain.model.QuizSettings
 import com.n1cologne.quizgame.domain.repository.QuizRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class QuizViewModel(
-    private val repository: QuizRepository = QuizMockRepository()
+    private val repository: QuizRepository = QuizApiRepository()
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(

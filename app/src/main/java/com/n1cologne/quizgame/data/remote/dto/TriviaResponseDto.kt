@@ -3,29 +3,29 @@ package com.n1cologne.quizgame.data.remote.dto
 import com.squareup.moshi.Json
 
 data class TriviaResponseDto(
-    @SerializedName("response_code")
+    @Json(name = "response_code")
     val responseCode: Int,
 
-    @SerializedName("results")
+    @Json(name = "results")
     val results: List<TriviaQuestionDto>
 )
 
 data class TriviaQuestionDto(
-    @SerializedName("type")
+    @Json(name = "type")
     val type: String,
 
-    @SerializedName("difficulty")
+    @Json(name = "difficulty")
     val difficulty: String,
 
-    @SerializedName("category")
+    @Json(name = "category")
     val category: String,
 
-    @SerializedName("question")
+    @Json(name = "question")
     val question: String,
 
-    @SerializedName("correct_answer")
+    @Json(name = "correct_answer")
     val correctAnswer: String,
 
-    @SerializedName("incorrect_answers")
+    @Json(name = "incorrect_answers")
     val incorrectAnswers: List<String>
 )
