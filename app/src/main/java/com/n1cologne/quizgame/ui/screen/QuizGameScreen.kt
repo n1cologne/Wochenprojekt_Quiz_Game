@@ -80,21 +80,21 @@ private fun QuizGameContent(
                     )
 
                     Text(
-                        text = "${uiState.correctAnswers} von " +
-                                "${uiState.questions.size} Fragen richtig"
+                        text = "${uiState.correctAnswers} / " +
+                                "${uiState.questions.size} Answers correct! "
                     )
 
                     Button(
                         onClick = onRestartQuizClick
                     ) {
-                        Text(text = "Nochmal spielen")
+                        Text(text = "Play again")
                     }
                 }
             }
 
             currentQuestion == null -> {
                 Text(
-                    text = "Keine Fragen verfügbar."
+                    text = "No questions available."
                 )
             }
 
@@ -128,7 +128,7 @@ private fun QuizGameContent(
                         ) {
                             Text(
                                 text = if (uiState.selectedAnswer == answer) {
-                                    "✓ $answer"
+                                    "-> $answer <-"
                                 } else {
                                     answer
                                 }
@@ -144,7 +144,7 @@ private fun QuizGameContent(
                             .fillMaxWidth()
                             .padding(top = 8.dp)
                     ) {
-                        Text(text = "Prüfe Antwort")
+                        Text(text = "Check Answer, please")
                     }
 
                     if (uiState.isAnswerChecked) {
@@ -153,9 +153,9 @@ private fun QuizGameContent(
 
                         Text(
                             text = if (isCorrect) {
-                                "Richtig!"
+                                "That's correct!"
                             } else {
-                                "Falsch! Richtige Antwort: ${currentQuestion.correctAnswer}"
+                                "That's unfortunately not correct! Correct Answer: ${currentQuestion.correctAnswer}"
                             },
                             style = MaterialTheme.typography.titleMedium
                         )
@@ -171,9 +171,9 @@ private fun QuizGameContent(
                         ) {
                             Text(
                                 text = if (isLastQuestion) {
-                                    "Quiz beenden"
+                                    "QuizGame is over! "
                                 } else {
-                                    "Nächste Frage"
+                                    "Next question, please"
                                 }
                             )
                         }
