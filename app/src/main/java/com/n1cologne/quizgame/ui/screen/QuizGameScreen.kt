@@ -3,6 +3,7 @@ package com.n1cologne.quizgame.ui.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,6 +23,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.n1cologne.quizgame.domain.model.Difficulty
 import com.n1cologne.quizgame.domain.model.QuizQuestion
 import com.n1cologne.quizgame.ui.theme.QuizGameTheme
+import androidx.compose.foundation.layout.Row
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.foundation.layout.height
+
 
 @Composable
 fun QuizGameScreen(
@@ -104,14 +110,42 @@ private fun QuizGameContent(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Text(
-                        text = "Frage ${uiState.currentQuestionIndex + 1} " +
-                                "von ${uiState.questions.size}"
+                        text = "QuizGame",
+                        modifier = Modifier.fillMaxWidth(),
+                        style = MaterialTheme.typography.headlineMedium,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    )
+
+                    Spacer(
+                        modifier = Modifier.height(4.dp)
                     )
 
                     Text(
-                        text = currentQuestion.category,
-                        style = MaterialTheme.typography.labelLarge
+                        text = "Question ${uiState.currentQuestionIndex + 1} " +
+                                "of ${uiState.questions.size}"
                     )
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = currentQuestion.category,
+                            style = MaterialTheme.typography.labelLarge
+                        )
+
+                        Text(
+                            text = currentQuestion.difficulty.name,
+                            style = MaterialTheme.typography.labelLarge
+                        )
+                    }
+
+                    Spacer(
+                        modifier = Modifier.height(4.dp)
+                    )
+
 
                     Text(
                         text = currentQuestion.question,
@@ -135,6 +169,10 @@ private fun QuizGameContent(
                             )
                         }
                     }
+
+                    Spacer(
+                        modifier = Modifier.weight(1f)
+                    )
 
                     Button(
                         onClick = onCheckAnswerClick,

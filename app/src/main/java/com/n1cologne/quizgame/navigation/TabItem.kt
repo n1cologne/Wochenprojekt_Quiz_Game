@@ -13,7 +13,7 @@ enum class TabItem(
 ) {
     SETTINGS(
         route = SettingsRoute,
-        tabTitle = "Einstellungen",
+        tabTitle = "Settings",
         tabIcon = Icons.Default.Settings
     ),
 
@@ -25,7 +25,7 @@ enum class TabItem(
 
     RESULT(
         route = ResultRoute,
-        tabTitle = "Ergebnisse",
+        tabTitle = "Results",
         tabIcon = Icons.Default.Star
     )
 }

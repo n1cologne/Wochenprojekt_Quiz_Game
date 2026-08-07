@@ -43,7 +43,7 @@ class QuizViewModel(
                 .onFailure { error ->
                     _uiState.value = QuizUiState(
                         errorMessage = error.message
-                            ?: "Die Fragen konnten nicht geladen werden."
+                            ?: "Questions could not be loaded."
                     )
                 }
         }

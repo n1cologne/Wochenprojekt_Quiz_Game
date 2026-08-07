@@ -19,15 +19,24 @@ import androidx.navigation.compose.rememberNavController
 import com.n1cologne.quizgame.ui.screen.QuizGameScreen
 import com.n1cologne.quizgame.ui.screen.ResultScreen
 import com.n1cologne.quizgame.ui.screen.SettingsScreen
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.n1cologne.quizgame.domain.model.Difficulty
+import com.n1cologne.quizgame.domain.model.QuizSettings
+import com.n1cologne.quizgame.ui.screen.QuizViewModel
 
 @Composable
 fun AppStart(
     modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController()
+    val quizViewModel: QuizViewModel = viewModel()
 
     var selectedTab by rememberSaveable {
         mutableStateOf(TabItem.QUIZ_GAME)
+    }
+
+    var selectedDifficulty by rememberSaveable {
+        mutableStateOf(Difficulty.ANY)
     }
 
     Scaffold(
@@ -61,11 +70,28 @@ fun AppStart(
             modifier = Modifier.padding(innerPadding)
         ) {
             composable<SettingsRoute> {
-                SettingsScreen()
+                SettingsScreen(
+                    selectedDifficulty = selectedDifficulty,
+                    onDifficultySelected = { difficulty ->
+                        selectedDifficulty = difficulty
+                    },
+                    onApplyClick = {
+                        quizViewModel.loadQuestions(
+                            QuizSettings(
+                                difficulty = selectedDifficulty
+                            )
+                        )
+
+                        selectedTab = TabItem.QUIZ_GAME
+                    }
+                )
             }
 
+
             composable<QuizGameRoute> {
-                QuizGameScreen()
+                QuizGameScreen(
+                    viewModel = quizViewModel
+                )
             }
 
             composable<ResultRoute> {
