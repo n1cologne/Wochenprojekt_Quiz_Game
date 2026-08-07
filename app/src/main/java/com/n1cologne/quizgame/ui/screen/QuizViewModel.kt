@@ -121,7 +121,14 @@ class QuizViewModel(
             selectedAnswer = null,
             isAnswerChecked = false,
             correctAnswers = 0,
+            isResultSaved = false,
             isQuizFinished = false
+        )
+    }
+
+    fun markResultAsSaved() {
+        _uiState.value = _uiState.value.copy(
+            isResultSaved = true
         )
     }
 }

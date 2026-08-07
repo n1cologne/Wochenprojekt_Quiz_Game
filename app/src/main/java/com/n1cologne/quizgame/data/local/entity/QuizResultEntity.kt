@@ -8,5 +8,6 @@ data class QuizResultEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val correctAnswers: Int,
-    val totalQuestions: Int
+    val totalQuestions: Int,
+    val difficulty: String
 )

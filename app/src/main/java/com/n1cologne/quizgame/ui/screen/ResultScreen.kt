@@ -2,7 +2,8 @@ package com.n1cologne.quizgame.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.n1cologne.quizgame.domain.model.Difficulty
 import com.n1cologne.quizgame.domain.model.QuizResult
 import com.n1cologne.quizgame.ui.theme.QuizGameTheme
 
@@ -65,11 +67,19 @@ private fun ResultContent(
                 Card(
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Column(
+                    Row (
                         modifier = Modifier.padding(16.dp)
                     ) {
                         Text(
-                            text = "${result.correctAnswers} von ${result.totalQuestions} richtig"
+                            text = "${result.correctAnswers} / ${result.totalQuestions} correct"
+                        )
+
+                        Spacer(
+                            modifier = Modifier.weight(1f)
+                        )
+
+                        Text(
+                            text = "Difficulty: ${result.difficulty.name}"
                         )
                     }
                 }
@@ -87,12 +97,14 @@ private fun ResultScreenPreview() {
                 QuizResult(
                     id = 1,
                     correctAnswers = 7,
-                    totalQuestions = 10
+                    totalQuestions = 10,
+                    difficulty = Difficulty.MEDIUM
                 ),
                 QuizResult(
                     id = 2,
                     correctAnswers = 9,
-                    totalQuestions = 10
+                    totalQuestions = 10,
+                    difficulty = Difficulty.HARD
                 )
             )
         )

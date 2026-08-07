@@ -23,6 +23,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.n1cologne.quizgame.domain.model.Difficulty
 import com.n1cologne.quizgame.domain.model.QuizSettings
 import com.n1cologne.quizgame.ui.screen.QuizViewModel
+import com.n1cologne.quizgame.ui.screen.ResultViewModel
 
 @Composable
 fun AppStart(
@@ -30,6 +31,7 @@ fun AppStart(
 ) {
     val navController = rememberNavController()
     val quizViewModel: QuizViewModel = viewModel()
+    val resultViewModel: ResultViewModel = viewModel()
 
     var selectedTab by rememberSaveable {
         mutableStateOf(TabItem.QUIZ_GAME)
@@ -87,15 +89,23 @@ fun AppStart(
                 )
             }
 
-
             composable<QuizGameRoute> {
                 QuizGameScreen(
-                    viewModel = quizViewModel
+                    viewModel = quizViewModel,
+                    onQuizFinished = { correctAnswers, totalQuestions ->
+                        resultViewModel.insertResult(
+                            correctAnswers = correctAnswers,
+                            totalQuestions = totalQuestions,
+                            difficulty = selectedDifficulty
+                        )
+                    }
                 )
             }
 
             composable<ResultRoute> {
-                ResultScreen()
+                ResultScreen(
+                    viewModel = resultViewModel
+                )
             }
         }
     }

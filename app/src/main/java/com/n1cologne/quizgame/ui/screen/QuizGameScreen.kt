@@ -27,14 +27,32 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.layout.height
-
+import androidx.compose.runtime.LaunchedEffect
 
 @Composable
 fun QuizGameScreen(
     modifier: Modifier = Modifier,
-    viewModel: QuizViewModel = viewModel()
+    viewModel: QuizViewModel = viewModel(),
+    onQuizFinished: (Int, Int) -> Unit = { _, _ -> }
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(
+        uiState.isQuizFinished,
+        uiState.isResultSaved
+    ) {
+        if (
+            uiState.isQuizFinished &&
+            !uiState.isResultSaved
+        ) {
+            onQuizFinished(
+                uiState.correctAnswers,
+                uiState.questions.size
+            )
+
+            viewModel.markResultAsSaved()
+        }
+    }
 
     QuizGameContent(
         uiState = uiState,

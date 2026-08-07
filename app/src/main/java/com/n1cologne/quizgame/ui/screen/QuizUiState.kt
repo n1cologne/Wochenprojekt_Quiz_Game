@@ -10,5 +10,6 @@ data class QuizUiState(
     val isAnswerChecked: Boolean = false,
     val correctAnswers: Int = 0,
     val isQuizFinished: Boolean = false,
+    val isResultSaved: Boolean = false,
     val errorMessage: String? = null
 )

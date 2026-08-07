@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.n1cologne.quizgame.data.local.QuizDatabase
 import com.n1cologne.quizgame.data.repository.QuizResultRepositoryImpl
+import com.n1cologne.quizgame.domain.model.Difficulty
 import com.n1cologne.quizgame.domain.model.QuizResult
 import com.n1cologne.quizgame.domain.repository.QuizResultRepository
 import kotlinx.coroutines.flow.SharingStarted
@@ -35,13 +36,15 @@ class ResultViewModel(
 
     fun insertResult(
         correctAnswers: Int,
-        totalQuestions: Int
+        totalQuestions: Int,
+        difficulty: Difficulty
     ) {
         viewModelScope.launch {
             repository.insertResult(
                 QuizResult(
                     correctAnswers = correctAnswers,
-                    totalQuestions = totalQuestions
+                    totalQuestions = totalQuestions,
+                    difficulty = difficulty
                 )
             )
         }
